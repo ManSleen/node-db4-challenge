@@ -9,6 +9,11 @@ module.exports = {
   updateRecipe
 };
 
+//getRecipes should return a list of all recipes in the database.
+function getRecipes() {
+  return db("recipes");
+}
+
 function addRecipe(newRecipe) {
   return db("recipes").insert(newRecipe, "id");
 }
@@ -19,11 +24,10 @@ function updateRecipe(changes, id) {
     .where({ id });
 }
 
-function deleteRecipe(recipe, id) {}
-
-//getRecipes should return a list of all recipes in the database.
-function getRecipes() {
-  return db("recipes");
+function deleteRecipe(id) {
+  return db("recipes")
+    .del()
+    .where({ id });
 }
 
 // getShoppingList should return a list of all ingredients and quantities for a given recipe

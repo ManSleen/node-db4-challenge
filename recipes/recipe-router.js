@@ -25,8 +25,29 @@ router.post("/", (req, res) => {
     });
 });
 
-router.put();
+router.put("/:id", (req, res) => {
+  const changes = req.body;
+  const { id } = req.params;
+  Recipes.updateRecipe(changes, id)
+    .then(recipe => {
+      res.status(200).json(recipe);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ message: "Could not update the  recipe in the db" });
+    });
+});
 
-router.delete();
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+  Recipes.deleteRecipe(id)
+    .then(recipe => {
+      res.status(200).json(recipe);
+    })
+    .catch(err => {
+      res.status(500).json({ message: "Could not delete recipe from the db" });
+    });
+});
 
 module.exports = router;
