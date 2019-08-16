@@ -14,8 +14,6 @@ exports.up = function(knex) {
         .string("name", 255)
         .notNullable()
         .unique();
-      tbl.float("quantity").notNullable();
-      tbl.string("unit_of_measure", 255).notNullable();
     })
     .createTable("recipes_ingredients", tbl => {
       tbl.increments();
@@ -35,6 +33,11 @@ exports.up = function(knex) {
         .inTable("ingredients")
         .onDelete("RESTRICT")
         .onUpdate("CASCADE");
+      tbl
+        .float("quantity")
+        .unsigned()
+        .notNullable();
+      tbl.string("unit_of_measure", 255).notNullable();
     });
 };
 
