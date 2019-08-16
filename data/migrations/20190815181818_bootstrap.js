@@ -37,7 +37,6 @@ exports.up = function(knex) {
         .float("quantity")
         .unsigned()
         .notNullable();
-      tbl.string("unit_of_measure", 255).notNullable();
     });
 };
 

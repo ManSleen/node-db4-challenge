@@ -50,4 +50,26 @@ router.delete("/:id", (req, res) => {
     });
 });
 
+router.get("/:id/shoppingList", (req, res) => {
+  const { id } = req.params;
+  Recipes.getShoppingList(id)
+    .then(recipe => {
+      res.status(200).json(recipe);
+    })
+    .catch(err => {
+      res.status(500).json({ message: "Could not delete recipe from the db" });
+    });
+});
+
+router.get("/:id/steps", (req, res) => {
+  const { id } = req.params;
+  Recipes.getInstructions(id)
+    .then(recipe => {
+      res.status(200).json(recipe);
+    })
+    .catch(err => {
+      res.status(500).json({ message: "Could not delete recipe from the db" });
+    });
+});
+
 module.exports = router;
